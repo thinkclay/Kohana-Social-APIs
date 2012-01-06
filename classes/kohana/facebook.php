@@ -20,7 +20,11 @@ class Kohana_Facebook
     
     protected function __construct()
     {
-        include Kohana::find_file('facebook', 'social/vendor');
+    	
+    	if (file_exists(MODPATH.'/social/vendor/facebook/src/facebook.php'))
+        	include MODPATH.'/social/vendor/facebook/src/facebook.php';
+		else
+			throw new Exception("Facebook Module was not found. Did you forget to init submodule?");
 
         // Do class setup
         $this->_facebook = new Facebook(
